@@ -16,8 +16,9 @@
 
 .vid-container {
   padding: 10px;
-  width: 380px;
-  display: table-cell;
+  width: 385px;
+  display: inline-block;
+  text-align: center;
 }
 
 .mdl-color-card h4 {
@@ -164,24 +165,6 @@ ul {
   background-color: rgb(250, 250, 250);
 }
 
-.videoWrapper {
-  position: relative;
-  padding-bottom: 56.25%;
-  /* 16:9 */
-  padding-top: 25px;
-  width: 100%;
-  height: 90%;
-  text-align: center;
-}
-
-.videoWrapper iframe {
-  position: absolute;
-  text-align: center;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-}
 
 .collapsible-body p {
   margin: 0;
@@ -221,6 +204,10 @@ body {
 .mdl-layout__header-row {
   padding-left: 30px;
   height: 4.5em;
+}
+
+.mdl-button{
+  display: inline-block;
 }
 
 .mdl-layout.is-small-screen .mdl-layout__header-row h3 {

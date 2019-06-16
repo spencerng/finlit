@@ -33,7 +33,6 @@
               <h3 id ="title" style="color: white; padding-left: 30px; margin-top: 50px">Knockoff Banzai</h3>
             </core-toolbar>
             <div class="game-pane" id="gamePane">
-              <!--<p id="answerText" style="padding: 30px; font-size: 20px">f</p>-->
               <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored"  id="nextButton" style="bottom-margin: 20px; display: none">Next</button>
               <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored"  id="submitButton" style="margin: 20px; display: none">Submit</button>
               <div id="mainMenu" style="display: none; text-align: center; padding: 10px; ">
@@ -57,6 +56,52 @@
                     <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored"  id="charFourButton" style="margin: 10px">Character #4</button>
                   </div>
                 </div>
+              </div>
+              <div  style="padding:30px; display: none;" id="statusScreen">
+                <button class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored" style="position: fixed;">
+                  <i class="material-icons">home</i>
+                </button>
+                <div style="display: table-row; width: 100%; text-align: center;">
+                  <div style="display: table-cell;">
+                    <img src="./orma/sad.png" width="200">  
+                  </div>
+                  <div style="display: table-cell;">
+                    <img src="./orma/expenses.png" width="200">  
+                  </div>
+                  <div style="display: table-cell; vertical-align: middle;">
+                    <p>
+                      <i class="material-icons">mood_bad</i>
+                      <p style="width:300px">
+                         <input class="mdl-slider mdl-js-slider" type="range" id="happyMeter" min="0" max="100" value="50" step="10">
+                      </p>
+                      <i class="material-icons">mood</i>
+                    </p>
+                    <p><i class="material-icons">attach_money</i> $4,000</p>
+                      <p><i class="material-icons">credit_card</i> -$100</p>
+                  </div>
+                </div>
+                
+                <p>Month #1</p>
+                <p>As you predicted, a project has popped up and your boss has specifically requested for you and your main competitor, Sal, to work overtime on this project. You know this will take some of your time, but at the same time, it can give you the boost you need to save up for your wedding. What do you do?</p>
+
+                <div style="display: table-row; width: 100%; text-align: center;">
+                  <div style="display: table-cell; vertical-align: middle;">
+                    <p>Option 1</p>
+                    <p>Take the overtime. It can help build a better relationship with you and your boss, and maybe even get that promotion and bonus.</p>
+                     <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored"  id="confirmButton" style="margin: 30px">Option 1</button>
+                  </div>
+                  <div style="display: table-cell; vertical-align: middle;">
+                    <p>Option 2</p>
+                    <p>Reject the offer. You simply don't have time, and maybe you can focus on other options of making money passively.</p>
+                    <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored"  id="confirmButton" style="margin: 30px">Option 2</button>
+                  </div>
+                  <div style="display: table-cell; vertical-align: middle;">
+                    <p>Option 3</p>
+                    <p>Ask to work from home. You still get the money, but you may not be able to develop the same relationship you could have by working late in office.</p>
+                    <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored"  id="confirmButton" style="margin: 30px">Option 3</button>
+                  </div>
+                </div>
+                
               </div>
               <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored center-button"  id="startButton" style="margin: 30px">Start</button>
             </div>

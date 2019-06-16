@@ -48,9 +48,11 @@ nextButton.onclick=function(){
 
 homeButton.onclick=function(){
 	$(statusScreen).fadeOut(function(){
+
 		$(mainMenu).fadeIn(500);
 		setTitle("Choose Your Character")	
 	});
+	$(resultScreen).fadeOut()
 	
 }
 

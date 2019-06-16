@@ -6,6 +6,7 @@ var statusScreen = document.getElementById("statusScreen")
 var title = document.getElementById("title")
 var charButtons = [document.getElementById("ormaButton"), document.getElementById("darleneButton"), document.getElementById("charThreeButton"), document.getElementById("charFourButton")]
 var homeButton = document.getElementById("homeButton")
+var homeButtonResult = document.getElementById("homeButtonResult")
 
 //Status menu
 var personImg = document.getElementById("personImg")
@@ -24,7 +25,18 @@ var resultTitle = document.getElementById("resultTitle")
 var resultDescription = document.getElementById("resultDescription")
 var nextButton = document.getElementById("nextButton");
 
+//Dynamic status vars
 var currentChar = ""
+var charState = {}
+
+class CharacterState {
+	constructor(initialMoney){
+		this.month = 1
+		this.credit = 0
+		this.money = initialMoney
+	}
+}
+
 //Initialize function
 startButton.onclick=function(){
 	$(this).fadeOut();
@@ -49,10 +61,18 @@ nextButton.onclick=function(){
 homeButton.onclick=function(){
 	$(statusScreen).fadeOut(function(){
 
-		$(mainMenu).fadeIn(500);
+		$(mainMenu).fadeIn();
 		setTitle("Choose Your Character")	
 	});
-	$(resultScreen).fadeOut()
+	
+}
+
+homeButtonResult.onclick=function(){
+	$(resultScreen).fadeOut(function(){
+
+		$(mainMenu).fadeIn();
+		setTitle("Choose Your Character")	
+	});
 	
 }
 

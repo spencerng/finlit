@@ -33,9 +33,8 @@
               <h3 id ="title" style="color: white; padding-left: 30px; margin-top: 50px">Knockoff Banzai</h3>
             </core-toolbar>
             <div class="game-pane" id="gamePane">
-              <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored"  id="nextButton" style="bottom-margin: 20px; display: none">Next</button>
               <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored"  id="submitButton" style="margin: 20px; display: none">Submit</button>
-              <div id="mainMenu" style="display: none; text-align: center; padding: 10px; ">
+              <div id="mainMenu" style="display: none; text-align: center; padding: 10px;justify-content: space-between; ">
                 <div style="display: table-row; width: 100%; text-align: center;">
                   <div class="vid-container">
                     <iframe src="https://drive.google.com/file/d/1AZGufIuLfnjRUWjeX4wl_hXmxCNxT2Mf/preview" width="200" height="213"allowfullscreen="true"></iframe>
@@ -57,52 +56,70 @@
                   </div>
                 </div>
               </div>
-              <div  style="padding:30px; display: none;" id="statusScreen">
-                <button class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored" style="position: fixed;">
+              <div id="resultScreen" style="display: none;">
+                <button class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored" style="position: absolute;top:760px;left:770px" id="homeButton">
+                  <i class="material-icons">home</i>
+                </button>
+                <div style="width: 100%; padding:20px">
+                  <iframe id="resultVideo" src="https://drive.google.com/file/d/1AZGufIuLfnjRUWjeX4wl_hXmxCNxT2Mf/preview"  height="445px" allowfullscreen="true" style="margin-right: 90px;width: 785px"></iframe>
+                </div>
+                <h3 id="resultTitle">Payraise Aquired!</h3>
+                <p id="resultDescription">Description Text here</p>
+                <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored"  id="nextButton" style="bottom-margin: 20px">Next</button>
+              </div>
+              <div  style="padding:30px; display: none;" id="statusScreen" style="position: absolute;">
+                <button class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored" style="position: absolute;top:760px;left:770px" id="homeButton">
                   <i class="material-icons">home</i>
                 </button>
                 <div style="display: table-row; width: 100%; text-align: center;">
                   <div style="display: table-cell;">
-                    <img src="./orma/sad.png" width="200">  
+                    <img src="./orma/sad.png" width="200" id="personImg">  
                   </div>
-                  <div style="display: table-cell;">
-                    <img src="./orma/expenses.png" width="200">  
+                  <div style="display: table-cell;padding-left: 20px">
+                    <img src="./orma/expenses.png" width="280" id="expensesImg">  
                   </div>
                   <div style="display: table-cell; vertical-align: middle;">
-                    <p>
-                      <i class="material-icons">mood_bad</i>
-                      <p style="width:300px">
-                         <input class="mdl-slider mdl-js-slider" type="range" id="happyMeter" min="0" max="100" value="50" step="10">
-                      </p>
+                    
+                    <p style="width:300px">
+                       <input class="mdl-slider mdl-js-slider" type="range" id="happyMeter" min="0" max="100" value="50" step="10">
+                    </p>
+                    <p style="width: 300px">
+                      <i class="material-icons">mood_bad</i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                       <i class="material-icons">mood</i>
                     </p>
-                    <p><i class="material-icons">attach_money</i> $4,000</p>
-                      <p><i class="material-icons">credit_card</i> -$100</p>
+                    <div style="height: 50px"><i class="material-icons" style="vertical-align: middle;font-size: 30px">attach_money</i> <span style="vertical-align: middle;font-size: 1.5em" id="cashText">$4,000</span></div>
+                    <div style="height: 50px"><i class="material-icons" style="vertical-align: middle;font-size: 30px">credit_card</i> <span style="vertical-align: middle;font-size: 1.5em" id="creditCardText">-$100</span></div>
                   </div>
                 </div>
                 
-                <p>Month #1</p>
-                <p>As you predicted, a project has popped up and your boss has specifically requested for you and your main competitor, Sal, to work overtime on this project. You know this will take some of your time, but at the same time, it can give you the boost you need to save up for your wedding. What do you do?</p>
+                <h4 id="monthText"><b>Month #1</b></h4>
+                <p id="situationText">As you predicted, a project has popped up and your boss has specifically requested for you and your main competitor, Sal, to work overtime on this project. You know this will take some of your time, but at the same time, it can give you the boost you need to save up for your wedding. What do you do?</p>
 
                 <div style="display: table-row; width: 100%; text-align: center;">
-                  <div style="display: table-cell; vertical-align: middle;">
-                    <p>Option 1</p>
-                    <p>Take the overtime. It can help build a better relationship with you and your boss, and maybe even get that promotion and bonus.</p>
-                     <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored"  id="confirmButton" style="margin: 30px">Option 1</button>
+                  <div style="display: table-cell; vertical-align: top; width: 270px">
+                    <p><b>Option 1</b></p>
+                    <p id="optionOneText">Take the overtime. It can help build a better relationship with you and your boss, and maybe even get that promotion and bonus.</p>
+                     
                   </div>
-                  <div style="display: table-cell; vertical-align: middle;">
-                    <p>Option 2</p>
-                    <p>Reject the offer. You simply don't have time, and maybe you can focus on other options of making money passively.</p>
-                    <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored"  id="confirmButton" style="margin: 30px">Option 2</button>
+                  <div style="display: table-cell; vertical-align: top; width: 270px">
+                    <p><b>Option 2</b></p>
+                    <p id="optionTwoText">Reject the offer. You simply don't have time, and maybe you can focus on other options of making money passively.</p>
+                    
                   </div>
-                  <div style="display: table-cell; vertical-align: middle;">
-                    <p>Option 3</p>
-                    <p>Ask to work from home. You still get the money, but you may not be able to develop the same relationship you could have by working late in office.</p>
-                    <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored"  id="confirmButton" style="margin: 30px">Option 3</button>
+                  <div style="display: table-cell; vertical-align: top; width: 270px">
+                    <p><b>Option 3</b></p>
+                    <p id="optionThreeText">Ask to work from home. You still get the money, but you may not be able to develop the same relationship you could have by working late in office.</p>
+                    
                   </div>
+                </div>
+                <div style="display: flex; justify-content: space-between;padding-left: 70px;padding-right: 70px">
+                  <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored"  id="optionOneButton">Option 1</button>
+                  <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored"  id="optionTwoButton">Option 2</button>
+                  <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored"  id="optionThreeButton">Option 3</button>
                 </div>
                 
               </div>
+
               <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored center-button"  id="startButton" style="margin: 30px">Start</button>
             </div>
           </div>
@@ -111,7 +128,7 @@
               <h3 id ="title" style="color: white; padding-left: 30px; margin-top: 30px">The Boring Stuff</h3>
             </core-toolbar>
             <div style="padding: 10px;width: 805px; text-align: center">
-              <iframe src="https://docs.google.com/presentation/d/e/2PACX-1vTXnrUrJgcgiDNFQ3-Onavz2CwOZ1MXf8vKSBpOIZPNvzBzTngE-6JvkNibP54k0octzf9BxDAmdMbq/embed?start=false&loop=false&delayms=60000" frameborder="1" width="480" height="482" allowfullscreen="true" mozallowfullscreen="true" webkitallowfullscreen="true"></iframe>
+              <iframe src="https://docs.google.com/presentation/d/1jOgHc4gzcj19OFlfEoEGnSfpHV44vFPG8fNaOJ1-k9U/embed?start=false&loop=false&delayms=60000" frameborder="1" width="480" height="482" allowfullscreen="true" mozallowfullscreen="true" webkitallowfullscreen="true"></iframe>
             </div>
         </div>
           <div class="mdl-layout-spacer"/>

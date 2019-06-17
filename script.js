@@ -28,17 +28,57 @@ var nextButton = document.getElementById("nextButton");
 //Dynamic status vars
 var currentChar = ""
 var charState = {}
+var monthlyEvents = {}
+var happyEvents = {}
+
 
 class CharacterState {
-	constructor(initialMoney){
+	constructor(initialMoney, initialSalary){
 		this.month = 1
 		this.credit = 0
 		this.money = initialMoney
+		this.salary = initialSalary
 	}
+
+}
+
+function initialize(){
+
+	//TODO - coplete this
+	/*charState["Orma"] = new CharacterState();
+	charState["Bean"] = new CharacterState();
+	charState["Darlene"] = new CharacterState();*/
+
+
+	var happyEventsRaw = readTextFile("./assets/happy.csv")
+	var monthlyEventsRaw = readTextFile("./assets/monthly.csv")
+
+	console.log(happyEventsRaw);
+
+}
+
+function readTextFile(file){
+    var rawFile = new XMLHttpRequest();
+    rawFile.open("GET", file, false);
+    rawFile.onreadystatechange = function ()
+    {
+        if(rawFile.readyState === 4)
+        {
+            if(rawFile.status === 200 || rawFile.status == 0)
+            {
+                var allText = rawFile.responseText;
+                alert(allText);
+            }
+        }
+    }
+    rawFile.send(null);
 }
 
 //Initialize function
 startButton.onclick=function(){
+	
+	initialize();
+
 	$(this).fadeOut();
 	
 	$(gamePane).animate({

@@ -283,7 +283,7 @@ function updateStatus(character, monthlyEvent) {
 		currentIndex = i;
 		optionButtons[i].onclick = function() {
 			changeState(charState[currentChar], monthlyEvents[currentChar][charState[currentChar].month-1].options[currentIndex].change);
-			updateResult(monthlyEvents[currentChar][charState[currentChar].month-1].options[i])
+			updateResult(monthlyEvents[currentChar][charState[currentChar].month-1].options[currentIndex])
 			$(statusScreen).fadeOut(function() {
 				$(resultScreen).fadeIn();
 			})

@@ -70,6 +70,15 @@ function HappyEvent(trigger, title, text, change, vidLink) {
 
 function changeState(charState, change) {
 	charState.happiness += change.happyChange;
+
+	if(charState.happiness > 15){
+		charState.happiness = 15;
+	}
+
+	if(charState.happiness < 0){
+		charState.happiness = 0;
+	}
+
 	if (change.moneyChange == 200000) {
 		charState.money += 2 * investment;
 	} else {
@@ -158,10 +167,10 @@ function loadFile(filePath) {
 
 function initialize() {
 
-	//TODO - coplete this
-	/*charState["Orma"] = new CharacterState();
-	charState["Bean"] = new CharacterState();
-	charState["Darlene"] = new CharacterState();*/
+	
+	charState["Orma"] = new CharacterState(13000, 180);
+	charState["Bean"] = new CharacterState(25000, -620);
+	charState["Darlene"] = new CharacterState(2500, -400);
 
 	var charNames = ["Orma", "Bean", "Darlene"];
 	for(var i = 0; i < 3; i++){
@@ -210,8 +219,8 @@ function initialize() {
 	}
 
 	nextButton.onclick = function() {
-		var nextStatus = getNextStatus(currentChar)
-		//update status based on next status
+		advanceMonth(charState[currentChar]);
+		changeState(charState[currentChar], monthlyEvents[currentChar][charState[currentChar].month-1].options[i].change);
 		$(resultScreen).fadeOut(function() {
 			$(statusScreen).fadeIn();
 		})
@@ -228,6 +237,7 @@ function initialize() {
 
 	for (var i = 0; i < optionButtons.length; i++) {
 		optionButtons[i].onclick = function() {
+			updateResult(monthlyEvents[currentChar][charState[currentChar].month-1].options[i])
 			$(statusScreen).fadeOut(function() {
 				$(resultScreen).fadeIn();
 			})
@@ -260,7 +270,7 @@ function setTitle(titleWords) {
 }
 
 
-function updateStatus(character, happyScore, money, credit, situation, options) {
+function updateStatus(character, credit, monthlyEvent) {
 	
 	if (happyScore <= 70 && happyScore >= 40) {
 		personImg.src = "./" + character + "/neutral.png";
@@ -271,22 +281,22 @@ function updateStatus(character, happyScore, money, credit, situation, options) 
 	}
 
 	expensesImg.src = "./" + character + "/expenses.png";
-
-	happyMeter.value = happyScore;
-	cashText.innerHTML = "$" + money;
-	creditCardText.innerHTML = "-$" + credit;
-	situationText.innerHTML = situation;
+	monthText.innerHTML = "Month #" + charState[character].month;
+	happyMeter.value = charState[character].happiness;
+	cashText.innerHTML = "$" + charState[character].money;
+	situationText.innerHTML = monthlyEvent.situation;
 	for (var i = 0; i < options.length; i++) {
-		optionTexts[i].innerHTML = options[i]
+		optionTexts[i].innerHTML = monthlyEvent.options[i].text
 	}
 }
 
-function updateResult(vidSrc, title, description) {
+function updateResult(chosenOption) {
+	resultTitle.innerHTML = "Result";
+	resultDescription.innerHTML = chosenOption.responseText;
+}
+
+function updateHappyEvent(vidSrc, title, description) {
 	resultVideo.src = vidSrc
 	resultTitle.innerHTML = title
 	resultDescription.innerHTML = description
-}
-
-function getNextStatus(character) {
-	return 1;
 }

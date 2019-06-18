@@ -302,7 +302,7 @@ startButton.onclick = function() {
 	$(this).fadeOut();
 
 	$(gamePane).animate({
-		height: 720
+		height: 750
 	}, 600);
 
 	setTitle("Choose Your Character")
@@ -329,7 +329,7 @@ function updateStatus(character, monthlyEvent) {
 	expensesImg.src = "./" + character + "/expenses.png";
 	monthText.innerHTML = "Month #" + charState[character].month;
 	happyMeter.MaterialSlider.change(charState[character].happiness);
-	cashText.innerHTML = "$" + charState[character].money;
+	cashText.innerHTML = charState[character].money;
 	situationText.innerHTML = monthlyEvent.situation;
 	for (var i = 0; i < monthlyEvent.options.length; i++) {
 		optionTexts[i].innerHTML = monthlyEvent.options[i].text

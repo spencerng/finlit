@@ -328,7 +328,7 @@ function updateStatus(character, monthlyEvent) {
 
 	expensesImg.src = "./" + character + "/expenses.png";
 	monthText.innerHTML = "Month #" + charState[character].month;
-	happyMeter.value = charState[character].happiness;
+	happyMeter.MaterialSlider.change(charState[character].happiness);
 	cashText.innerHTML = "$" + charState[character].money;
 	situationText.innerHTML = monthlyEvent.situation;
 	for (var i = 0; i < monthlyEvent.options.length; i++) {

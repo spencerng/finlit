@@ -293,7 +293,7 @@ function updateStatus(character, monthlyEvent) {
 
 function updateResult(chosenOption) {
 	resultTitle.innerHTML = "Result";
-	resultDescription.innerHTML = chosenOption.responseText;
+	resultDescription.innerHTML = chosenOption.text;
 }
 
 function updateHappyEvent(vidSrc, title, description) {

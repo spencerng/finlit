@@ -53,7 +53,7 @@ function initialize(){
 	var happyEventsRaw = loadFile("./assets/happy.csv")
 	var monthlyEventsRaw = loadFile("./assets/monthly.csv")
 
-	console.log(monthlyEventsRaw)
+	alert(monthlyEventsRaw)
 
 
 }

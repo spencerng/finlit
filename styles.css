@@ -504,6 +504,7 @@ body {
 .game-pane {
   height: 100%;
   text-align: center;
+  vertical-align: middle;
 }
 
 .game-pane .mdl-card__supporting-text {

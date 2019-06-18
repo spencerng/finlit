@@ -4,7 +4,7 @@ var gamePane = document.getElementById("gamePane");
 var mainMenu = document.getElementById("mainMenu");
 var statusScreen = document.getElementById("statusScreen");
 var title = document.getElementById("title");
-var charButtons = [document.getElementById("ormaButton"), document.getElementById("darleneButton"), document.getElementById("charThreeButton"), document.getElementById("charFourButton")];
+var charButtons = [document.getElementById("ormaButton"), document.getElementById("darleneButton"), document.getElementById("beanButton")];
 var homeButton = document.getElementById("homeButton");
 
 //Status menu
@@ -190,6 +190,25 @@ function initialize() {
 		happyEvents[terms[0]].push(new HappyEvent(parseInt(terms[1]), terms[2], terms[3], change, terms[6]))
 	}
 
+	for (var i = 0; i < charButtons.length; i++) {
+
+		charButtons[i].onclick = function() {
+
+
+			$(mainMenu).fadeOut(function() {
+				statusScreen.style.display = "block";
+				$(statusScreen).fadeIn(500);
+			});
+
+			var character = $(this)[0].id.split("Button")[0];
+			character = character.charAt(0).toUpperCase() + character.substring(1);
+			setTitle(character);
+			currentChar = character
+			//updateStatus(character, 20, 69, 100, "Situation", ["Opt 1", "Opt 2", "opt 3"]);
+
+		};
+	}
+
 }
 
 
@@ -243,24 +262,7 @@ for (var i = 0; i < optionButtons.length; i++) {
 	};
 }
 
-for (var i = 0; i < charButtons.length; i++) {
 
-	charButtons[i].onclick = function() {
-
-
-		$(mainMenu).fadeOut(function() {
-			statusScreen.style.display = "block";
-			$(statusScreen).fadeIn(500);
-		});
-
-		var character = $(this)[0].id.split("Button")[0];
-		character = character.charAt(0).toUpperCase() + character.substring(1);
-		setTitle(character);
-		currentChar = character
-		//updateStatus(character, 20, 69, 100, "Situation", ["Opt 1", "Opt 2", "opt 3"]);
-
-	};
-}
 
 function setTitle(titleWords) {
 	$(title).fadeOut(function() {

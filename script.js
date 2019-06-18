@@ -258,6 +258,7 @@ function setTitle(titleWords) {
 	});
 }
 
+var currentIndex = 0;
 
 function updateStatus(character, monthlyEvent) {
 	var happyScore = charState[character].happiness;
@@ -279,8 +280,9 @@ function updateStatus(character, monthlyEvent) {
 	}
 
 	for (var i = 0; i < optionButtons.length; i++) {
+		currentIndex = i;
 		optionButtons[i].onclick = function() {
-			changeState(charState[currentChar], monthlyEvents[currentChar][charState[currentChar].month-1].options[i].change);
+			changeState(charState[currentChar], monthlyEvents[currentChar][charState[currentChar].month-1].options[currentIndex].change);
 			updateResult(monthlyEvents[currentChar][charState[currentChar].month-1].options[i])
 			$(statusScreen).fadeOut(function() {
 				$(resultScreen).fadeIn();

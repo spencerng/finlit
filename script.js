@@ -378,4 +378,7 @@ function updateHappyEvent(happyEvent) {
 	if(charState[currentChar].month>=7){
 		happyNextButton.innerHTML = "FINISH"
 	}
+	else{
+		happyNextButton.innerHTML = "NEXT"	
+	}
 }

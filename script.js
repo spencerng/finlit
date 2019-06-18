@@ -126,10 +126,9 @@ function initialize() {
 	var monthlyEventsRows = loadFile("./assets/monthly.csv").split("\n");
 	var happyEventsRows = loadFile("./assets/happy.csv").split("\n");
 
-	for (var i = 0; i < monthlyEventsRows.length; i++) {
+	for (var i = 0; i < monthlyEventsRows.length-1; i++) {
 		var terms = CSVtoArray(monthlyEventsRows[i]);
 		var options = [];
-		console.log(monthlyEventsRows);
 		for (var j = 0; j < 3; j++) {
 			var change = new Change(parseInt(terms[j * 5 + 4]), parseInt(terms[j * 5 + 5]), parseInt(terms[j * 5 + 6]));
 			options.push(new Option(terms[j * 5 + 3], change, terms[j * 5 + 7]));
@@ -138,7 +137,7 @@ function initialize() {
 		monthlyEvents[terms[0]] = new MonthlyEvent(parseInt(terms[1]), terms[2], options);
 	}
 
-	for (var i = 0; i < happyEventsRows.length; i++) {
+	for (var i = 0; i < happyEventsRows.length-1; i++) {
 		var terms = CSVtoArray(happyEventsRows[i]);
 		var change = new Change(parseInt(terms[4]), 0, parseInt(terms[5]));
 		happyEvents[terms[0]] = new HappyEvent(parseInt(terms[1]), terms[2], terms[3], change, terms[6]);

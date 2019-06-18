@@ -31,15 +31,57 @@ var charState = {}
 var monthlyEvents = {}
 var happyEvents = {}
 
+//situation for Darlene month 4
+var investment = 0
 
-class CharacterState {
-	constructor(initialMoney, initialSalary){
+function CharacterState(initialMoney, initialSalary){
 		this.month = 1
-		this.credit = 0
+		this.happiness = 0
 		this.money = initialMoney
 		this.salary = initialSalary
-	}
+}
 
+function Change(moneyChange, happyChange, rateChange){
+	this.moneyChange = moneyChange
+	this.happyChange = happyChange
+	this.rateChange = rateChange
+}
+
+function Option(text, change, responseText){
+	this.text = text
+	this.change = change
+	this.responseText = responseText
+}
+
+function MonthlyEvent(month, situation, options){
+	this.month = month
+	this.situation = situation
+	this.options = options
+}
+
+function HappyEvent(trigger, title, text, change, vidLink){
+	this.trigger = trigger
+	this.title = title
+	this.text = text
+	this.change = change
+	this.vidLink = vidLink
+	this.shown = false
+}
+
+function changeState(charState, change){
+	charState.happiness += change.happyChange;
+	if(change.moneyChange==200000){
+		charState.money += 2 * investment
+	}
+	else{
+		charState.money += change.moneyChange;
+	}
+	charState.salary += change.rateChange;
+}
+
+function advanceMonth(charState){
+	charState.money += charState.salary;
+	charState.month += 1;
 }
 
 function initialize(){
@@ -49,14 +91,48 @@ function initialize(){
 	charState["Bean"] = new CharacterState();
 	charState["Darlene"] = new CharacterState();*/
 
+	var monthlyEventsRows = loadFile("./assets/monthly.csv").split("\n")
+	var happyEventsRows = loadFile("./assets/happy.csv").split("\n")	
 
-	var happyEventsRaw = loadFile("./assets/happy.csv")
-	var monthlyEventsRaw = loadFile("./assets/monthly.csv")
+	for(var i = 0; i < monthlyEventsRows.length; i++){
+		var terms = CSVtoArray(monthlyEventsRows[i])
+		var options = []
 
-	alert(monthlyEventsRaw)
+		for(var j = 0; j < 3; j++){
+			var change = new Change(parseInt(terms[j*5+4]),parseInt(terms[j*5+5]),parseInt(terms[j*5+6])
+			options.push(new Option(terms[j*5+3], change, terms[j*5+7]))
+		}
 
+		monthlyEvents[terms[0]] = new MonthlyEvent(parseInt(terms[1]), terms[2], options)
+	}
+
+	for(var i = 0; i < happyEventsRows.length; i++){
+		var terms = CSVtoArray(happyEventsRows[i])
+		var change = new Change(parseInt(terms[4]), 0, parseInt(terms[5]))
+		happyEvents[terms[0]] = new HappyEvent(parseInt(terms[1]), terms[2], terms[3], change, terms[6])
+	}
 
 }
+
+function CSVtoArray(text) {
+    var re_valid = /^\s*(?:'[^'\\]*(?:\\[\S\s][^'\\]*)*'|"[^"\\]*(?:\\[\S\s][^"\\]*)*"|[^,'"\s\\]*(?:\s+[^,'"\s\\]+)*)\s*(?:,\s*(?:'[^'\\]*(?:\\[\S\s][^'\\]*)*'|"[^"\\]*(?:\\[\S\s][^"\\]*)*"|[^,'"\s\\]*(?:\s+[^,'"\s\\]+)*)\s*)*$/;
+    var re_value = /(?!\s*$)\s*(?:'([^'\\]*(?:\\[\S\s][^'\\]*)*)'|"([^"\\]*(?:\\[\S\s][^"\\]*)*)"|([^,'"\s\\]*(?:\s+[^,'"\s\\]+)*))\s*(?:,|$)/g;
+    // Return NULL if input string is not well formed CSV string.
+    if (!re_valid.test(text)) return null;
+    var a = [];                     // Initialize array to receive values.
+    text.replace(re_value, // "Walk" the string using replace with callback.
+        function(m0, m1, m2, m3) {
+            // Remove backslash from \' in single quoted values.
+            if      (m1 !== undefined) a.push(m1.replace(/\\'/g, "'"));
+            // Remove backslash from \" in double quoted values.
+            else if (m2 !== undefined) a.push(m2.replace(/\\"/g, '"'));
+            else if (m3 !== undefined) a.push(m3);
+            return ''; // Return empty string.
+        });
+    // Handle special case of empty last value.
+    if (/,\s*$/.test(text)) a.push('');
+    return a;
+};
 
 function loadFile(filePath) {
   var result = null;

@@ -233,16 +233,6 @@ function initialize() {
 
 	}
 
-	for (var i = 0; i < optionButtons.length; i++) {
-		optionButtons[i].onclick = function() {
-			changeState(charState[currentChar], monthlyEvents[currentChar][charState[currentChar].month-1].options[i].change);
-			updateResult(monthlyEvents[currentChar][charState[currentChar].month-1].options[i])
-			$(statusScreen).fadeOut(function() {
-				$(resultScreen).fadeIn();
-			})
-		};
-	}
-
 }
 
 
@@ -286,6 +276,16 @@ function updateStatus(character, monthlyEvent) {
 	situationText.innerHTML = monthlyEvent.situation;
 	for (var i = 0; i < monthlyEvent.options.length; i++) {
 		optionTexts[i].innerHTML = monthlyEvent.options[i].text
+	}
+
+	for (var i = 0; i < optionButtons.length; i++) {
+		optionButtons[i].onclick = function() {
+			changeState(charState[currentChar], monthlyEvents[currentChar][charState[currentChar].month-1].options[i].change);
+			updateResult(monthlyEvents[currentChar][charState[currentChar].month-1].options[i])
+			$(statusScreen).fadeOut(function() {
+				$(resultScreen).fadeIn();
+			})
+		};
 	}
 }
 

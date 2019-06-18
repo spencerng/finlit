@@ -36,7 +36,7 @@ var investment = 0;
 
 function CharacterState(initialMoney, initialSalary) {
 	this.month = 1;
-	this.happiness = 0;
+	this.happiness = 7;
 	this.money = initialMoney;
 	this.salary = initialSalary;
 }
@@ -206,7 +206,7 @@ function initialize() {
 			character = character.charAt(0).toUpperCase() + character.substring(1);
 			setTitle(character);
 			currentChar = character
-			updateStatus(charState[currentChar], monthlyEvents[currentChar][charState[currentChar].month-1]);
+			updateStatus(currentChar, monthlyEvents[currentChar][charState[currentChar].month-1]);
 			$(mainMenu).fadeOut(function() {
 				statusScreen.style.display = "block";
 				$(statusScreen).fadeIn(500);
@@ -217,7 +217,7 @@ function initialize() {
 
 	nextButton.onclick = function() {
 		advanceMonth(charState[currentChar]);
-		updateStatus(charState[currentChar], monthlyEvents[currentChar][charState[currentChar].month-1]);
+		updateStatus(currentChar, monthlyEvents[currentChar][charState[currentChar].month-1]);
 		
 		$(resultScreen).fadeOut(function() {
 			$(statusScreen).fadeIn();

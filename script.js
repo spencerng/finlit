@@ -163,6 +163,12 @@ function initialize() {
 	charState["Bean"] = new CharacterState();
 	charState["Darlene"] = new CharacterState();*/
 
+	var charNames = ["Orma", "Bean", "Darlene"];
+	for(var i = 0; i < 3; i++){
+		monthlyEvents[charNames[i]] = [];
+		happyEvents[charNames[i]] = [];
+	}
+
 	var monthlyEventsRows = loadFile("./assets/monthly.csv").split("\n");
 	var happyEventsRows = loadFile("./assets/happy.csv").split("\n");
 
@@ -175,13 +181,13 @@ function initialize() {
 			options.push(new Option(terms[j * 5 + 3], change, terms[j * 5 + 7]));
 		}
 
-		monthlyEvents[terms[0]] = new MonthlyEvent(parseInt(terms[1]), terms[2], options);
+		monthlyEvents[terms[0]].push(new MonthlyEvent(parseInt(terms[1]), terms[2], options));
 	}
 
 	for (var i = 0; i < happyEventsRows.length-1; i++) {
 		var terms = CSVtoArray(happyEventsRows[i], ",")[0];
 		var change = new Change(parseInt(terms[4]), 0, parseInt(terms[5]));
-		happyEvents[terms[0]] = new HappyEvent(parseInt(terms[1]), terms[2], terms[3], change, terms[6]);
+		happyEvents[terms[0]].push(new HappyEvent(parseInt(terms[1]), terms[2], terms[3], change, terms[6]))
 	}
 
 }

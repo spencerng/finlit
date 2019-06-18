@@ -20,10 +20,15 @@ var optionButtons = [document.getElementById("optionOneButton"), document.getEle
 
 //Result screen
 var resultScreen = document.getElementById("resultScreen");
-var resultVideo = document.getElementById("resultVideo");
 var resultTitle = document.getElementById("resultTitle");
 var resultDescription = document.getElementById("resultDescription");
 var nextButton = document.getElementById("nextButton");
+
+//Happy event screen
+var happyEventScreen = document.getElementById("happyEventScreen");
+var happyEventTitle = document.getElementById("happyEventTitle");
+var happyEventDescription = document.getElementById("happyEventDescription");
+var happyNextButton = document.getElementById("happyNextButton");
 
 //Dynamic status vars
 var currentChar = "";
@@ -216,12 +221,38 @@ function initialize() {
 	}
 
 	nextButton.onclick = function() {
+
+		var nextEvent = getHappyEvent();
+		
+		if(nextEvent!= null){
+			updateHappyEvent(nextEvent);
+			changeState(charState[currentChar], nextEvent.change);
+			$(resultScreen).fadeOut(function() {
+				$(happyEventScreen).fadeIn();
+			})
+		}
+
+		else{
+			$(resultScreen).fadeOut(function() {
+				$(statusScreen).fadeIn();
+			})
+		}
+
 		advanceMonth(charState[currentChar]);
 		updateStatus(currentChar, monthlyEvents[currentChar][charState[currentChar].month-1]);
-		
-		$(resultScreen).fadeOut(function() {
-			$(statusScreen).fadeIn();
-		})
+	}
+
+	happyNextButton.onclick = function(){
+		if(charState[currentChar].month==7){
+			$(happyEventScreen).fadeOut(function() {
+				$(mainMenu).fadeIn();
+			})
+		}
+		else{
+			$(happyEventScreen).fadeOut(function() {
+				$(statusScreen).fadeIn();
+			})
+		}
 	}
 
 	homeButton.onclick = function() {
@@ -233,6 +264,31 @@ function initialize() {
 
 	}
 
+}
+
+function getHappyEvent(){
+	var happyScore = charState[currentChar].happiness
+	if(charState[currentChar].month>=7){
+		happyScore = 3000
+	}
+
+	if(happyScore > 7){
+		for(var i = happyEvents[currentChar].length-1; i >=0; i--){
+			if(happyScore >= happyEvents[currentChar][i].trigger && happyEvents[currentChar][i].trigger > 7 && !happyEvents[currentChar][i].shown){
+				return happyEvents[currentChar][i];
+			}
+		}
+	}
+
+	else{
+		for(var i = 0; i < happyEvents[currentChar].length; i++){
+			if(happyScore <= happyEvents[currentChar][i].trigger && happyEvents[currentChar][i].trigger < 7 && !happyEvents[currentChar][i].shown){
+				return happyEvents[currentChar][i];
+			}
+		}
+	}
+
+	return null;
 }
 
 
@@ -298,8 +354,12 @@ function updateResult(chosenOption) {
 	resultDescription.innerHTML = chosenOption.responseText;
 }
 
-function updateHappyEvent(vidSrc, title, description) {
-	resultVideo.src = vidSrc
-	resultTitle.innerHTML = title
-	resultDescription.innerHTML = description
+function updateHappyEvent(happyEvent) {
+	happyEventVideo.src = happyEvent.vidLink;
+	happyEventTitle.innerHTML = happyEvent.title;
+	happyEventDescription.innerHTML = happyEvent.text;
+
+	if(charState[currentChar].month>=7){
+		happyNextButton.innerHTML = "FINISH"
+	}
 }

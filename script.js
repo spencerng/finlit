@@ -84,36 +84,6 @@ function advanceMonth(charState) {
 	charState.month += 1;
 }
 
-function initialize() {
-
-	//TODO - coplete this
-	/*charState["Orma"] = new CharacterState();
-	charState["Bean"] = new CharacterState();
-	charState["Darlene"] = new CharacterState();*/
-
-	var monthlyEventsRows = loadFile("./assets/monthly.csv").split("\n");
-	var happyEventsRows = loadFile("./assets/happy.csv").split("\n");
-
-	for (var i = 0; i < monthlyEventsRows.length; i++) {
-		var terms = CSVtoArray(monthlyEventsRows[i]);
-		var options = [];
-		console.log(monthlyEventsRows);
-		for (var j = 0; j < 3; j++) {
-			var change = new Change(parseInt(terms[j * 5 + 4]), parseInt(terms[j * 5 + 5]), parseInt(terms[j * 5 + 6]));
-			options.push(new Option(terms[j * 5 + 3], change, terms[j * 5 + 7]));
-		}
-
-		monthlyEvents[terms[0]] = new MonthlyEvent(parseInt(terms[1]), terms[2], options);
-	}
-
-	for (var i = 0; i < happyEventsRows.length; i++) {
-		var terms = CSVtoArray(happyEventsRows[i]);
-		var change = new Change(parseInt(terms[4]), 0, parseInt(terms[5]));
-		happyEvents[terms[0]] = new HappyEvent(parseInt(terms[1]), terms[2], terms[3], change, terms[6]);
-	}
-
-}
-
 function CSVtoArray(text) {
 	var re_valid = /^\s*(?:'[^'\\]*(?:\\[\S\s][^'\\]*)*'|"[^"\\]*(?:\\[\S\s][^"\\]*)*"|[^,'"\s\\]*(?:\s+[^,'"\s\\]+)*)\s*(?:,\s*(?:'[^'\\]*(?:\\[\S\s][^'\\]*)*'|"[^"\\]*(?:\\[\S\s][^"\\]*)*"|[^,'"\s\\]*(?:\s+[^,'"\s\\]+)*)\s*)*$/;
 	var re_value = /(?!\s*$)\s*(?:'([^'\\]*(?:\\[\S\s][^'\\]*)*)'|"([^"\\]*(?:\\[\S\s][^"\\]*)*)"|([^,'"\s\\]*(?:\s+[^,'"\s\\]+)*))\s*(?:,|$)/g;
@@ -144,6 +114,38 @@ function loadFile(filePath) {
 	}
 	return result;
 }
+
+
+function initialize() {
+
+	//TODO - coplete this
+	/*charState["Orma"] = new CharacterState();
+	charState["Bean"] = new CharacterState();
+	charState["Darlene"] = new CharacterState();*/
+
+	var monthlyEventsRows = loadFile("./assets/monthly.csv").split("\n");
+	var happyEventsRows = loadFile("./assets/happy.csv").split("\n");
+
+	for (var i = 0; i < monthlyEventsRows.length; i++) {
+		var terms = CSVtoArray(monthlyEventsRows[i]);
+		var options = [];
+		console.log(monthlyEventsRows);
+		for (var j = 0; j < 3; j++) {
+			var change = new Change(parseInt(terms[j * 5 + 4]), parseInt(terms[j * 5 + 5]), parseInt(terms[j * 5 + 6]));
+			options.push(new Option(terms[j * 5 + 3], change, terms[j * 5 + 7]));
+		}
+
+		monthlyEvents[terms[0]] = new MonthlyEvent(parseInt(terms[1]), terms[2], options);
+	}
+
+	for (var i = 0; i < happyEventsRows.length; i++) {
+		var terms = CSVtoArray(happyEventsRows[i]);
+		var change = new Change(parseInt(terms[4]), 0, parseInt(terms[5]));
+		happyEvents[terms[0]] = new HappyEvent(parseInt(terms[1]), terms[2], terms[3], change, terms[6]);
+	}
+
+}
+
 
 //Initialize function
 startButton.onclick = function() {

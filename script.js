@@ -50,14 +50,15 @@ function initialize(){
 	charState["Darlene"] = new CharacterState();*/
 
 
-	var happyEventsRaw = readTextFile("./assets/happy.csv")
-	var monthlyEventsRaw = readTextFile("./assets/monthly.csv")
+	var happyEventsRaw = loadFile("./assets/happy.csv")
+	var monthlyEventsRaw = loadFile("./assets/monthly.csv")
 
-	console.log(happyEventsRaw);
+	console.log(monthlyEventsRaw)
+
 
 }
 
-function readTextFile(file){
+function loadFile(file){
     var rawFile = new XMLHttpRequest();
     rawFile.open("GET", file, false);
     rawFile.onreadystatechange = function ()
@@ -67,7 +68,7 @@ function readTextFile(file){
             if(rawFile.status === 200 || rawFile.status == 0)
             {
                 var allText = rawFile.responseText;
-                alert(allText);
+                return allText;
             }
         }
     }

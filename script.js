@@ -100,7 +100,7 @@ function advanceMonth(charState) {
 }
 
 //Main menu screen
-function updateMainMenu{
+function updateMainMenu(){
 	document.getElementById("beanCash").innerHTML = charState["Bean"].money;
 	document.getElementById("beanHappy").innerHTML = charState["Bean"].happiness + "/15";
 	document.getElementById("ormaCash").innerHTML = charState["Orma"].money;

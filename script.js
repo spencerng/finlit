@@ -284,7 +284,7 @@ function updateStatus(character, monthlyEvent) {
 	happyMeter.value = charState[character].happiness;
 	cashText.innerHTML = "$" + charState[character].money;
 	situationText.innerHTML = monthlyEvent.situation;
-	for (var i = 0; i < options.length; i++) {
+	for (var i = 0; i < monthlyEvent.options.length; i++) {
 		optionTexts[i].innerHTML = monthlyEvent.options[i].text
 	}
 }

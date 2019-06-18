@@ -269,11 +269,11 @@ function setTitle(titleWords) {
 }
 
 
-function updateStatus(character, credit, monthlyEvent) {
-	
-	if (happyScore <= 70 && happyScore >= 40) {
+function updateStatus(character, monthlyEvent) {
+	var happyScore = charState[character].happiness;
+	if (happyScore <= 10 && happyScore >= 4) {
 		personImg.src = "./" + character + "/neutral.png";
-	} else if (happyScore > 70) {
+	} else if (happyScore > 10) {
 		personImg.src = "./" + character + "/happy.png";
 	} else {
 		personImg.src = "./" + character + "/sad.png";

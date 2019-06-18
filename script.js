@@ -175,7 +175,7 @@ function initialize() {
 	for (var i = 0; i < monthlyEventsRows.length-1; i++) {
 		var terms = CSVtoArray(monthlyEventsRows[i], ",")[0];
 		var options = [];
-		console.log(terms)
+		
 		for (var j = 0; j < 3; j++) {
 			var change = new Change(parseInt(terms[j * 5 + 4]), parseInt(terms[j * 5 + 5]), parseInt(terms[j * 5 + 6]));
 			options.push(new Option(terms[j * 5 + 3], change, terms[j * 5 + 7]));
@@ -209,6 +209,31 @@ function initialize() {
 		};
 	}
 
+	nextButton.onclick = function() {
+		var nextStatus = getNextStatus(currentChar)
+		//update status based on next status
+		$(resultScreen).fadeOut(function() {
+			$(statusScreen).fadeIn();
+		})
+	}
+
+	homeButton.onclick = function() {
+		$(statusScreen).fadeOut(function() {
+
+			$(mainMenu).fadeIn();
+			setTitle("Choose Your Character")
+		});
+
+	}
+
+	for (var i = 0; i < optionButtons.length; i++) {
+		optionButtons[i].onclick = function() {
+			$(statusScreen).fadeOut(function() {
+				$(resultScreen).fadeIn();
+			})
+		};
+	}
+
 }
 
 
@@ -228,42 +253,6 @@ startButton.onclick = function() {
 	$(mainMenu).fadeIn(500);
 };
 
-nextButton.onclick = function() {
-	var nextStatus = getNextStatus(currentChar)
-	//update status based on next status
-	$(resultScreen).fadeOut(function() {
-		$(statusScreen).fadeIn();
-	})
-}
-
-homeButton.onclick = function() {
-	$(statusScreen).fadeOut(function() {
-
-		$(mainMenu).fadeIn();
-		setTitle("Choose Your Character")
-	});
-
-}
-
-homeButtonResult.onclick = function() {
-	$(resultScreen).fadeOut(function() {
-
-		$(mainMenu).fadeIn();
-		setTitle("Choose Your Character")
-	});
-
-}
-
-for (var i = 0; i < optionButtons.length; i++) {
-	optionButtons[i].onclick = function() {
-		$(statusScreen).fadeOut(function() {
-			$(resultScreen).fadeIn();
-		})
-	};
-}
-
-
-
 function setTitle(titleWords) {
 	$(title).fadeOut(function() {
 		$(this).html(titleWords).fadeIn();
@@ -272,7 +261,7 @@ function setTitle(titleWords) {
 
 
 function updateStatus(character, happyScore, money, credit, situation, options) {
-	console.log("status updated")
+	
 	if (happyScore <= 70 && happyScore >= 40) {
 		personImg.src = "./" + character + "/neutral.png";
 	} else if (happyScore > 70) {

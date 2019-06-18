@@ -202,25 +202,23 @@ function initialize() {
 	for (var i = 0; i < charButtons.length; i++) {
 
 		charButtons[i].onclick = function() {
-
-
-			$(mainMenu).fadeOut(function() {
-				statusScreen.style.display = "block";
-				$(statusScreen).fadeIn(500);
-			});
-
 			var character = $(this)[0].id.split("Button")[0];
 			character = character.charAt(0).toUpperCase() + character.substring(1);
 			setTitle(character);
 			currentChar = character
-			//updateStatus(character, 20, 69, 100, "Situation", ["Opt 1", "Opt 2", "opt 3"]);
+			updateStatus(charState[currentChar], monthlyEvents[currentChar][charState[currentChar].month-1]);
+			$(mainMenu).fadeOut(function() {
+				statusScreen.style.display = "block";
+				$(statusScreen).fadeIn(500);
+			});
 
 		};
 	}
 
 	nextButton.onclick = function() {
 		advanceMonth(charState[currentChar]);
-		changeState(charState[currentChar], monthlyEvents[currentChar][charState[currentChar].month-1].options[i].change);
+		updateStatus(charState[currentChar], monthlyEvents[currentChar][charState[currentChar].month-1]);
+		
 		$(resultScreen).fadeOut(function() {
 			$(statusScreen).fadeIn();
 		})
@@ -237,6 +235,7 @@ function initialize() {
 
 	for (var i = 0; i < optionButtons.length; i++) {
 		optionButtons[i].onclick = function() {
+			changeState(charState[currentChar], monthlyEvents[currentChar][charState[currentChar].month-1].options[i].change);
 			updateResult(monthlyEvents[currentChar][charState[currentChar].month-1].options[i])
 			$(statusScreen).fadeOut(function() {
 				$(resultScreen).fadeIn();

@@ -30,6 +30,8 @@ var happyEventTitle = document.getElementById("happyEventTitle");
 var happyEventDescription = document.getElementById("happyEventDescription");
 var happyNextButton = document.getElementById("happyNextButton");
 
+
+
 //Dynamic status vars
 var currentChar = "";
 var charState = {};
@@ -95,6 +97,16 @@ function changeState(charState, change) {
 function advanceMonth(charState) {
 	charState.money += charState.salary;
 	charState.month += 1;
+}
+
+//Main menu screen
+function updateMainMenu{
+	document.getElementById("beanCash").innerHTML = charState["Bean"].money;
+	document.getElementById("beanHappy").innerHTML = charState["Bean"].happiness + "/15";
+	document.getElementById("ormaCash").innerHTML = charState["Orma"].money;
+	document.getElementById("ormaHappy").innerHTML = charState["Orma"].happiness + "/15";
+	document.getElementById("darleneCash").innerHTML = charState["Darlene"].money;
+	document.getElementById("darleneHappy").innerHTML = charState["Darlene"].happiness + "/15";
 }
 
 function CSVtoArray(strData, strDelimiter){
@@ -244,6 +256,7 @@ function initialize() {
 
 	happyNextButton.onclick = function(){
 		if(charState[currentChar].month>7){
+			updateMainMenu();
 			$(happyEventScreen).fadeOut(function() {
 				$(mainMenu).fadeIn();
 			})
@@ -256,6 +269,7 @@ function initialize() {
 	}
 
 	homeButton.onclick = function() {
+		updateMainMenu();
 		$(statusScreen).fadeOut(function() {
 
 			$(mainMenu).fadeIn();
@@ -302,7 +316,7 @@ startButton.onclick = function() {
 	$(this).fadeOut();
 
 	$(gamePane).animate({
-		height: 750
+		height: 780
 	}, 600);
 
 	setTitle("Choose Your Character")

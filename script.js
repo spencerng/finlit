@@ -243,7 +243,7 @@ function initialize() {
 	}
 
 	happyNextButton.onclick = function(){
-		if(charState[currentChar].month==7){
+		if(charState[currentChar].month>7){
 			$(happyEventScreen).fadeOut(function() {
 				$(mainMenu).fadeIn();
 			})
@@ -275,6 +275,7 @@ function getHappyEvent(){
 	if(happyScore > 7){
 		for(var i = happyEvents[currentChar].length-1; i >=0; i--){
 			if(happyScore >= happyEvents[currentChar][i].trigger && happyEvents[currentChar][i].trigger > 7 && !happyEvents[currentChar][i].shown){
+				happyEvents[currentChar][i].shown = true;
 				return happyEvents[currentChar][i];
 			}
 		}
@@ -283,6 +284,7 @@ function getHappyEvent(){
 	else{
 		for(var i = 0; i < happyEvents[currentChar].length; i++){
 			if(happyScore <= happyEvents[currentChar][i].trigger && happyEvents[currentChar][i].trigger < 7 && !happyEvents[currentChar][i].shown){
+				happyEvents[currentChar][i].shown = true;
 				return happyEvents[currentChar][i];
 			}
 		}

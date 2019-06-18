@@ -83,7 +83,7 @@ function advanceMonth(charState) {
 	charState.month += 1;
 }
 
-function CSVtoArray( strData, strDelimiter ){
+function CSVtoArray(strData, strDelimiter){
         // Check to see if the delimiter is defined. If not,
         // then default to comma.
         strDelimiter = (strDelimiter || ",");
@@ -142,7 +142,7 @@ function CSVtoArray( strData, strDelimiter ){
         }
         // Return the parsed data.
         return( arrData );
-    }
+}
 
 function loadFile(filePath) {
 	var result = null;
@@ -167,9 +167,8 @@ function initialize() {
 	var happyEventsRows = loadFile("./assets/happy.csv").split("\n");
 
 	for (var i = 0; i < monthlyEventsRows.length-1; i++) {
-		var terms = CSVtoArray(monthlyEventsRows[i], ",");
+		var terms = CSVtoArray(monthlyEventsRows[i], ",")[0];
 		var options = [];
-		console.log(i)
 		console.log(terms)
 		for (var j = 0; j < 3; j++) {
 			var change = new Change(parseInt(terms[j * 5 + 4]), parseInt(terms[j * 5 + 5]), parseInt(terms[j * 5 + 6]));
@@ -180,7 +179,7 @@ function initialize() {
 	}
 
 	for (var i = 0; i < happyEventsRows.length-1; i++) {
-		var terms = CSVtoArray(happyEventsRows[i], ",");
+		var terms = CSVtoArray(happyEventsRows[i], ",")[0];
 		var change = new Change(parseInt(terms[4]), 0, parseInt(terms[5]));
 		happyEvents[terms[0]] = new HappyEvent(parseInt(terms[1]), terms[2], terms[3], change, terms[6]);
 	}
